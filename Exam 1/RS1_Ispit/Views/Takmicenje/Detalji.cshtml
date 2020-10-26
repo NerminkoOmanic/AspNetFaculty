@@ -1,0 +1,41 @@
+﻿@model RS1_Ispit_asp.net_core.ViewModels.TakmicenjeDetaljiVM
+
+@{
+    ViewData["Title"] = "Detalji";
+}
+
+<h2>Detalji</h2>
+<h3>Skola domacin : @Model.SkolaDomacin</h3>
+<h4>Razred : @Model.Razred </h4>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th> Takmicenje Id </th>
+        <th> Predmet </th>
+        <th> Razred </th>
+        <th> Datum </th>
+        <th> Broj ucesnika koji nisu pristupili </th>
+        <th> Najbolji ucesnik ( Skola | Odjeljenje | Ime i prezime ) </th>
+        <th> Akcija </th>
+
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in @Model.Takmicenja)
+    {
+        <tr>
+
+            <td> @item.TakmicenjeId </td>
+            <td> @item.Predmet </td>
+            <td> @item.Razred </td>
+            <td> @item.DatumTakmicenja</td>
+            <td> @item.BrojNepristupljenih</td>
+            <td> @item.Skola | @item.Odjeljenje | @item.ImePrezime</td>
+            <td> <a asp-action="Rezultati" asp-route-takmicenjeId="@item.TakmicenjeId"> Rezultati </a></td>
+
+        </tr>
+    }
+    </tbody>
+</table>
+<a  asp-controller="Takmicenje" asp-action="Dodaj" asp-route-skolaId="@Model.SkolaId" class="btn btn-default" style="float:left"> Dodaj</a>
+<br/>

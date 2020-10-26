@@ -1,0 +1,30 @@
+﻿@model RS1_Ispit_asp.net_core.ViewModels.TakmicenjeRezultatiVM
+
+@{
+    ViewData["Title"] = "Rezultati";
+}
+
+<h2>Rezultati</h2>
+<h3>Skola domacin: @Model.SkolaDomacin</h3>
+<h3>Predmet: @Model.Predmet</h3>
+<h3>Razred: @Model.Razred</h3>
+<h3>Datum: @Model.Datum</h3>
+
+<a class="btn btn-default" href="/Takmicenje/Zakljucaj?takmicenjeId=@Model.TakmicenjeId">Zakljucaj</a>
+<div id="ajaxDiv" href="/Takmicenje/RezultatiPV?takmicenjeId=@Model.TakmicenjeId" ajax-poziv="da" ajaxRezultat="ajaxDiv">
+
+</div>
+<br/>
+<a asp-controller="Takmicenje" asp-action="Dodaj" asp-route-skolaId="@Model.SkolaId" class="btn btn-default" style="float:left"> Novo takmicenje</a>
+<br />
+<script>
+
+    $(document).ready(function () {
+
+        $.get("/Takmicenje/RezultatiPV?takmicenjeID=@Model.TakmicenjeId", function (data, status) {
+            $("#ajaxDiv").html(data);
+        });
+
+    });
+</script>
+

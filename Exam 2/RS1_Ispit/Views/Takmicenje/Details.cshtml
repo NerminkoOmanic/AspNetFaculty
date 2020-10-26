@@ -1,0 +1,52 @@
+﻿@model RS1_Ispit_asp.net_core.ViewModels.TakDetailsVM
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Skola domacin: @Model.SkolaDomacin</h2>
+@if (@Model.Razred == 0)
+{
+    <h2>Razred: svi razredi</h2>
+}
+else
+{
+    <h2>Razred: @Model.Razred</h2>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>TakmicenjeID</th>
+            <th>Predmet</th>
+            <th>Razred</th>
+            <th>Datum</th>
+            <th>
+                Broj ucesnika
+                koji nisu
+                pristupili
+            </th>
+            <th>
+                Najbolji ucesnik
+                (Skola | Odjeljenje
+                | Ime i prezime
+            </th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in @Model.Takmicenja)
+        {
+            <tr>
+                <td>@item.TakmicenjeID</td>
+                <td>@item.Predmet</td>
+                <td>@item.Razred</td>
+                <td>@item.Datum</td>
+                <td>@item.BrojNepristupljenih</td>
+                <td>@item.UcesnikSkola | @item.UcesnikOdjeljenje | @item.UcesnikIme</td>
+                <td><a href="/Takmicenje/Rezultati?takmicenjeID=@item.TakmicenjeID">Rezultati</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a class="btn btn-default" href="/Takmicenje/Dodaj?skolaID=@Model.SkolaID">Dodaj</a>
+<br />
