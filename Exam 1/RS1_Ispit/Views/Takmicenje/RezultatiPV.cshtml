@@ -1,0 +1,84 @@
+﻿@model RS1_Ispit_asp.net_core.ViewModels.TakmicenjeRezultatiVM
+@{
+    ViewData["Title"] = "RezultatiPV";
+}
+<style>
+    .DA {
+        background-color: green;
+        color: white
+    }
+
+    .NE {
+        background-color: red;
+        color: white
+    }
+</style>
+
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Odjeljenje</th>
+        <th>Broj u dnevniku</th>
+        <th>Pristupio</th>
+        <th>Rezultat bodovi (max 100)</th>
+        <th>Akcija</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in @Model.Ucesnici)
+    {
+        <tr>
+            <td>@item.Odjeljenje</td>
+            <td>@item.BrojUDnevniku</td>
+            <td>
+                @if (@Model.Zakljucano)
+                {
+                    <span class="@item.Pristupiostring">
+                        @item.Pristupiostring
+                    </span>
+                }
+                else
+                {
+                    <a class="@item.Pristupiostring" href="/Takmicenje/Prisustvo?ucesnikId=@item.TakmicenjeUcesnikId" ajax-poziv="da" ajax-rezultat="ajaxDiv">@item.Pristupiostring</a>
+                }
+                    
+            </td>
+            <td>
+                @if (@Model.Zakljucano)
+                {
+                    <span>@item.Bodovi</span>
+                }
+                else
+                {
+                    <form method="post" asp-action="UrediPV" ajax-poziv="da" ajax-rezultat="ajaxDiv">
+                        <input name="takmicenjeUcesnikId" value="@item.TakmicenjeUcesnikId" hidden="hidden"/>
+                        <input name="bodovi" placeholder="@item.Bodovi" style="width: 100px"/>
+                        <button style="visibility:hidden" hidden="hidden" type="submit" class="btn btn-primary">Snimi</button>
+                    </form>
+                }
+            </td>
+            <td>
+                @if (@Model.Zakljucano)
+                {
+                    <span>Uredi</span>
+                }
+                else
+                {
+                    <a class="btn btn-default" href="/Takmicenje/UrediPV?ucesnikId=@item.TakmicenjeUcesnikId" ajax-poziv="da" ajax-rezultat="ajaxDiv">Uredi</a>
+
+                }
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+@if (@Model.Zakljucano==false)
+{
+    <a asp-controller="Takmicenje" asp-action="DodajUcesnikaPV" asp-route-takmicenjeId="@Model.TakmicenjeId" ajax-poziv="da" ajax-rezultat="ajaxDiv" class="btn btn-default">Dodaj ucesnika</a>
+}
+else
+{
+    <span>Dodaj ucesnika</span>
+}
