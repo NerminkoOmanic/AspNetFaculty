@@ -20,6 +20,7 @@ MVC desing pattern is used
 ## Prerequisites
 
 * SQL sever for storing database
+ * Change connection string, it is connecting locally with windows auth
 * [EntityFramework](https://docs.microsoft.com/en-us/ef/core/get-started/overview/first-app?tabs=visual-studio) setting up inside Package Manager Console in Visual Studio
   * Install-Package Microsoft.EntityFrameworkCore.Tools
   * Add-Migration InitialCreate
