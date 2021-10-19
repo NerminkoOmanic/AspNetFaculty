@@ -1,8 +1,8 @@
 # About the repository
-Every folder is different practical assignment for exam of Software development 1 
-Inside the folder there is sub folder with solution done in asp.net core 
-Assignment is to make web application in C#
-File with .pdf extension contains assignments and preview of frontend pages which needs to be done
+Every folder is different practical assignment for exam of Software development 1  
+Inside the folder there is sub folder with solution done in asp.net core  
+Assignment is to make web application in C#  
+File with .pdf extension contains assignments and preview of frontend pages which needs to be done  
 
 MVC desing pattern is used
 
